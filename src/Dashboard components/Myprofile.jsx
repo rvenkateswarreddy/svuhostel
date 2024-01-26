@@ -1,7 +1,7 @@
 // Import necessary dependencies
 import React from "react";
 import { Container, Card, ListGroup } from "react-bootstrap";
-import "./myprofile.css"; // Import your neumorphic styles
+import "./Myprofile.css"; // Import your neumorphic styles
 
 const Myprofile = ({ data }) => {
   // Destructure user data
