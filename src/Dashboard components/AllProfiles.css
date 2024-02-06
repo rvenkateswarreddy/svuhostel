@@ -124,7 +124,10 @@ body {
 .modal-buttons button {
   flex: 1; /* Make buttons take equal width */
 }
-
+.back {
+  color: red;
+  font-size: 25px;
+}
 /* Responsive Styling */
 @media only screen and (max-width: 600px) {
   /* Table Styling for Mobile */

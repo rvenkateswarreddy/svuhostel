@@ -14,14 +14,11 @@ const Complaints = () => {
   // Fetch recent complaints when the component mounts
   useEffect(() => {
     axios
-      .get(
-        "https://hostelmanagement-23j3.onrender.com/dashboard/complaints/recent",
-        {
-          headers: {
-            "x-token": localStorage.getItem("token"),
-          },
-        }
-      )
+      .get("https://svhostel.onrender.com/dashboard/complaints/recent", {
+        headers: {
+          "x-token": localStorage.getItem("token"),
+        },
+      })
       .then((res) => setRecentComplaints(res.data.data))
       .catch((er) => console.log(er));
   }, []);
@@ -38,7 +35,7 @@ const Complaints = () => {
 
     try {
       await axios.post(
-        "https://hostelmanagement-23j3.onrender.com/dashboard/complaints",
+        "https://svhostel.onrender.com/dashboard/complaints",
         complaint,
         {
           headers: {
@@ -49,7 +46,7 @@ const Complaints = () => {
 
       // Fetch recent complaints again after submitting a new complaint
       const response = await axios.get(
-        "https://hostelmanagement-23j3.onrender.com/dashboard/complaints/recent",
+        "https://svhostel.onrender.com/dashboard/complaints/recent",
         {
           headers: {
             "x-token": localStorage.getItem("token"),

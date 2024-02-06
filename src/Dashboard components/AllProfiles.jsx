@@ -14,7 +14,7 @@ const AllProfiles = () => {
 
   useEffect(() => {
     axios
-      .get("https://hostelmanagement-23j3.onrender.com/allprofiles", {
+      .get("https://svhostel.onrender.com/allprofiles", {
         headers: {
           "x-token": localStorage.getItem("token"),
         },
@@ -30,9 +30,9 @@ const AllProfiles = () => {
   );
 
   const renderTable = (userData, title) => (
-    <div className="tablewholecontainer">
+    <div id="allprofiletablecontainer" className="tablewholecontainer">
       <h2 style={{ marginTop: "10px" }}>{title}</h2>
-      <div className="table-container">
+      <div className="table-container ">
         <table className="neumorphic-table">
           <thead>
             <tr>
@@ -85,6 +85,11 @@ const AllProfiles = () => {
           </tbody>
         </table>
       </div>
+      <div>
+        <a className="back" href="#Backtop">
+          Back to top
+        </a>
+      </div>
     </div>
   );
 
@@ -110,7 +115,7 @@ const AllProfiles = () => {
   const handleSaveEdit = async () => {
     try {
       const response = await axios.put(
-        `https://hostelmanagement-23j3.onrender.com/editprofile/${editingUserId}`,
+        `https://svhostel.onrender.com/editprofile/${editingUserId}`,
         editModalValues,
         {
           headers: {
@@ -142,7 +147,7 @@ const AllProfiles = () => {
   const handleRemoveProfile = async (userId) => {
     try {
       const response = await axios.delete(
-        `https://hostelmanagement-23j3.onrender.com/removeprofile/${encodeURIComponent(
+        `https://svhostel.onrender.com/removeprofile/${encodeURIComponent(
           userId
         )}`,
         {
@@ -183,6 +188,7 @@ const AllProfiles = () => {
           Search by Full Name:
           <input
             type="text"
+            id="Backtop"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -268,7 +274,7 @@ const AllProfiles = () => {
                 />
               </label>
               <label>
-                Department:
+                hostelblock
                 <input
                   type="text"
                   name="hostelblock"
@@ -277,11 +283,20 @@ const AllProfiles = () => {
                 />
               </label>
               <label>
-                Department:
+                roomno
                 <input
                   type="text"
                   name="roomno"
                   value={editModalValues.roomno}
+                  onChange={handleInputChange}
+                />
+              </label>
+              <label>
+                Department:
+                <input
+                  type="text"
+                  name="department"
+                  value={editModalValues.department}
                   onChange={handleInputChange}
                 />
               </label>

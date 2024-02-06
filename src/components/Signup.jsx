@@ -35,10 +35,7 @@ const Signup = () => {
 
     try {
       // Implement signup logic using axios
-      await axios.post(
-        "https://hostelmanagement-23j3.onrender.com/register",
-        formData
-      );
+      await axios.post("https://svhostel.onrender.com/register", formData);
 
       // Display success message
       alert("registration successful");

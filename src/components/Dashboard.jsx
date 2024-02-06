@@ -8,6 +8,7 @@ import BillGenerator from "../Dashboard components/BillGenerator";
 import MessStatus from "../Dashboard components/MessStatus";
 import Suggestions from "../Dashboard components/Suggestions";
 import TimeDisplay from "../Dashboard components/TimeDisplay";
+import MessBill from "./MessBill";
 import WelcomeMessage from "../Dashboard components/WelcomeMessage";
 import "./Dashboard.css";
 import Welcomeuser from "./Welcomeuser";
@@ -20,13 +21,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("https://hostelmanagement-23j3.onrender.com/myprofile", {
+      .get("https://svhostel.onrender.com/myprofile", {
         headers: {
           "x-token": localStorage.getItem("token"),
         },
       })
       .then((res) =>
         setdata({
+          _id: res.data.mydata._id,
           usertype: res.data.mydata.usertype,
           email: res.data.mydata.email,
           mobile: res.data.mydata.mobile,
@@ -115,6 +117,15 @@ const Dashboard = () => {
             </Nav.Item>
             <Nav.Item>
               <NavLink
+                to="/dashboard/messbill"
+                className="nav-link"
+                onClick={() => setSidebarActive(false)}
+              >
+                Mess Bill
+              </NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink
                 to="/dashboard/complaints"
                 className="nav-link"
                 onClick={() => setSidebarActive(false)}
@@ -168,6 +179,7 @@ const Dashboard = () => {
               }
             />
             <Route path="myprofile" element={<Myprofile data={data} />} />
+            <Route path="messbill" element={<MessBill data={data} />} />
             <Route path="complaints" element={<Complaints />} />
             <Route path="billgenerator" element={<BillGenerator />} />
             <Route path="messstatus" element={<MessStatus />} />

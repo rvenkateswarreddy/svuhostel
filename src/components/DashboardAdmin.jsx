@@ -5,11 +5,14 @@ import { Container, Row, Col, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import AllProfiles from "../Dashboard components/AllProfiles";
 import AdminComplaints from "../Dashboard components/AdminComplaints";
 import BillGenerator from "../Dashboard components/BillGenerator";
+import Feeslist from "../Dashboard components/Feeslist";
 import Hostelpics from "../Dashboard components/Hostelpics";
 import MessStatus from "../Dashboard components/MessStatus";
 import AdminSuggestions from "../Dashboard components/AdminSuggestions";
 import TimeDisplay from "../Dashboard components/TimeDisplay";
-import WelcomeMessage from "../Dashboard components/WelcomeMessage";
+import Billmanage from "../Dashboard components/Billmanage";
+import Managerooms from "../Dashboard components/Managerooms";
+// import WelcomeMessage from "../Dashboard components/WelcomeMessage";
 import Welcomeuser from "./Welcomeuser";
 import "./Dashboard.css";
 import axios from "axios";
@@ -22,7 +25,7 @@ const DashboardAdmin = () => {
 
   useEffect(() => {
     axios
-      .get("https://hostelmanagement-23j3.onrender.com/allprofiles", {
+      .get("https://svhostel.onrender.com/allprofiles", {
         headers: {
           "x-token": localStorage.getItem("token"),
         },
@@ -32,7 +35,7 @@ const DashboardAdmin = () => {
   }, []);
   useEffect(() => {
     axios
-      .get("https://hostelmanagement-23j3.onrender.com/myprofile", {
+      .get("https://svhostel.onrender.com/myprofile", {
         headers: {
           "x-token": localStorage.getItem("token"),
         },
@@ -128,6 +131,22 @@ const DashboardAdmin = () => {
                 Bill Generator
               </NavLink>
             </Nav.Item>
+
+            <Nav.Item>
+              <NavLink to="/admindashboard/managerooms" className="nav-link">
+                Manage rooms
+              </NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink to="/admindashboard/feeslist" className="nav-link">
+                student fees list
+              </NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink to="/admindashboard/billmanage" className="nav-link">
+                Bill manages
+              </NavLink>
+            </Nav.Item>
             <Nav.Item>
               <NavLink to="/admindashboard/hostelpics" className="nav-link">
                 Hostelpics
@@ -168,6 +187,9 @@ const DashboardAdmin = () => {
             <Route path="allprofiles" element={<AllProfiles data={data} />} />
             <Route path="admincomplaints" element={<AdminComplaints />} />
             <Route path="billgenerator" element={<BillGenerator />} />
+            <Route path="billmanage" element={<Billmanage />} />
+            <Route path="managerooms" element={<Managerooms />} />
+            <Route path="feeslist" element={<Feeslist />} />
             <Route path="hostelpics" element={<Hostelpics />} />
             <Route path="messstatus" element={<MessStatus />} />
             <Route path="adminsuggestions" element={<AdminSuggestions />} />

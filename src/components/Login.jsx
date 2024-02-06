@@ -6,81 +6,129 @@ import { ToastContainer, toast } from "react-toastify"; // Import toast from rea
 import "react-toastify/dist/ReactToastify.css"; // Import default styles
 
 const Login = () => {
-  const [formData, setFormData] = useState({
+  const [formDataAdmin, setFormDataAdmin] = useState({
     email: "",
     password: "",
   });
-  const [text, settext] = useState(false);
-  const [auth, setauth] = useState(false);
+  const [formDataUser, setFormDataUser] = useState({
+    email: "",
+    password: "",
+  });
+  const [textAdmin, settextAdmin] = useState(false);
+  const [textUser, settextUser] = useState(false);
+  const [authAdmin, setAuthAdmin] = useState(false);
+  const [authUser, setAuthUser] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChangeAdmin = (e) => {
+    setFormDataAdmin({ ...formDataAdmin, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
+  const handleChangeUser = (e) => {
+    setFormDataUser({ ...formDataUser, [e.target.name]: e.target.value });
+  };
+
+  const handleAdminLogin = async (e) => {
     e.preventDefault();
-    settext(true);
-    setauth(false);
+    settextAdmin(true);
+    setAuthAdmin(false);
 
     try {
       const response = await axios.post(
-        "https://hostelmanagement-23j3.onrender.com/login",
-        formData
+        "https://svhostel.onrender.com/login",
+        formDataAdmin
       );
 
       const token = response.data.token;
       localStorage.setItem("token", token);
-      alert("login successful");
-      const isAdmin = response.data.usertype;
+      const userType = response.data.usertype; // Assuming the server returns the user's usertype
 
-      setauth(true);
+      if (userType === "admin") {
+        alert("Admin login successful");
 
-      if (isAdmin == "admin") {
         navigate("/admindashboard");
+        toast.success("Admin successfully logged in!");
       } else {
-        navigate("/dashboard");
+        alert("invalid admin details");
       }
 
       // Show success toast notification
-      toast.success("Successfully logged in!");
     } catch (error) {
-      toast.error("Login failed:", error);
+      toast.error("Admin login failed:", error);
 
       if (error.response && error.response.status === 401) {
-        toast.error("Login failed. Please check your email and password.");
+        toast.error(
+          "Admin login failed. Please check your email and password."
+        );
       } else {
-        toast.error("Login failed. An error occurred.");
+        toast.error("Admin login failed. An error occurred.");
       }
     } finally {
-      setauth(true);
-      settext(false);
+      setAuthAdmin(true);
+      settextAdmin(false);
+    }
+  };
+
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+    settextUser(true);
+    setAuthUser(false);
+
+    try {
+      const response = await axios.post(
+        "https://svhostel.onrender.com/login",
+        formDataUser
+      );
+
+      const token = response.data.token;
+      const userType = response.data.usertype; // Assuming the server returns the user's usertype
+      localStorage.setItem("token", token);
+
+      if (userType === "user") {
+        alert("user login successful");
+
+        navigate("/dashboard");
+        toast.success("user successfully logged in!");
+      } else {
+        alert("invalid user details");
+      }
+    } catch (error) {
+      toast.error("User login failed:", error);
+
+      if (error.response && error.response.status === 401) {
+        toast.error("User login failed. Please check your email and password.");
+      } else {
+        toast.error("User login failed. An error occurred.");
+      }
+    } finally {
+      setAuthUser(true);
+      settextUser(false);
     }
   };
 
   return (
     <Container className="neumorphic-container1">
-      <div className="neumorphic-form1">
-        <h2 className="text-center">Login</h2>
-        <Form onSubmit={handleLogin}>
-          <Form.Group controlId="email" className="form-group">
+      <div className="neumorphic-form1 admin-form">
+        <h2 className="text-center">Admin Login</h2>
+        <Form onSubmit={handleAdminLogin}>
+          <Form.Group controlId="emailAdmin" className="form-group">
             <Form.Label className="label">Email:</Form.Label>
             <Form.Control
               type="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={formDataAdmin.email}
+              onChange={handleChangeAdmin}
               className="input neumorphic-input"
               required
             />
           </Form.Group>
-          <Form.Group controlId="password" className="form-group">
+          <Form.Group controlId="passwordAdmin" className="form-group">
             <Form.Label className="label">Password:</Form.Label>
             <Form.Control
               type="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
+              value={formDataAdmin.password}
+              onChange={handleChangeAdmin}
               className="input neumorphic-input"
               required
             />
@@ -89,12 +137,42 @@ const Login = () => {
             type="submit"
             className="submit-button mt-2 neumorphic-button"
           >
-            {text ? "processing" : "LOGIN"}
+            {textAdmin ? "processing" : "LOGIN"}
           </Button>
         </Form>
-        <p className="text-center mt-2">
-          Don't have an account? <Link to="/register">Signup here</Link>.
-        </p>
+      </div>
+      <div className="neumorphic-form1 user-form">
+        <h2 className="text-center">User Login</h2>
+        <Form onSubmit={handleUserLogin}>
+          <Form.Group controlId="emailUser" className="form-group">
+            <Form.Label className="label">Email:</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={formDataUser.email}
+              onChange={handleChangeUser}
+              className="input neumorphic-input"
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="passwordUser" className="form-group">
+            <Form.Label className="label">Password:</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={formDataUser.password}
+              onChange={handleChangeUser}
+              className="input neumorphic-input"
+              required
+            />
+          </Form.Group>
+          <Button
+            type="submit"
+            className="submit-button mt-2 neumorphic-button"
+          >
+            {textUser ? "processing" : "LOGIN"}
+          </Button>
+        </Form>
       </div>
       <ToastContainer />
     </Container>

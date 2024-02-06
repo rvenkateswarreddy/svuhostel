@@ -8,14 +8,11 @@ const AdminComplaints = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://hostelmanagement-23j3.onrender.com/admindashboard/complaints",
-        {
-          headers: {
-            "x-token": localStorage.getItem("token"),
-          },
-        }
-      )
+      .get("https://svhostel.onrender.com/admindashboard/complaints", {
+        headers: {
+          "x-token": localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         setUsersWithComplaints(res.data.data);
         setIsLoading(false); // Set isLoading to false after data is loaded

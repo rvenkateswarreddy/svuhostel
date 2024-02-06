@@ -13,13 +13,17 @@ import Protect from "./Protect";
 import Myprofile from "./Dashboard components/Myprofile";
 import Complaints from "./Dashboard components/Complaints";
 import BillGenerator from "./Dashboard components/BillGenerator";
+import Billmanage from "./Dashboard components/Billmanage";
+import Managerooms from "./Dashboard components/Managerooms";
 import MessStatus from "./Dashboard components/MessStatus";
 import Suggestions from "./Dashboard components/Suggestions";
 import AllProfiles from "./Dashboard components/AllProfiles";
+import MessBill from "./components/MessBill";
 import AdminComplaints from "./Dashboard components/AdminComplaints";
 import AdminSuggestions from "./Dashboard components/AdminSuggestions";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Feeslist from "./Dashboard components/Feeslist";
 const App = () => {
   return (
     <>
@@ -43,6 +47,10 @@ const App = () => {
           <Route path="allprofiles" element={<AllProfiles />} />
           <Route path="admincomplaints" element={<AdminComplaints />} />
           <Route path="billgenerator" element={<BillGenerator />} />
+          <Route path="billmanage" element={<Billmanage />} />
+          <Route path="managerooms" element={<Managerooms />} />
+          <Route path="feeslist" element={<Feeslist />} />
+
           <Route path="messstatus" element={<MessStatus />} />
           <Route path="adminsuggestions" element={<AdminSuggestions />} />
         </Route>
@@ -55,6 +63,8 @@ const App = () => {
           }
         >
           <Route path="myprofile" element={<Myprofile />} />
+          <Route path="messbill" element={<MessBill />} />
+
           <Route path="complaints" element={<Complaints />} />
           <Route path="adminbillgenerator" element={<BillGenerator />} />
           <Route path="messstatus" element={<MessStatus />} />

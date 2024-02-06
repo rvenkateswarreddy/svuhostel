@@ -15,14 +15,11 @@ const Suggestions = () => {
   // Fetch recent suggestions when the component mounts
   useEffect(() => {
     axios
-      .get(
-        "https://hostelmanagement-23j3.onrender.com/dashboard/suggestions/recent",
-        {
-          headers: {
-            "x-token": localStorage.getItem("token"),
-          },
-        }
-      )
+      .get("https://svhostel.onrender.com/dashboard/suggestions/recent", {
+        headers: {
+          "x-token": localStorage.getItem("token"),
+        },
+      })
       .then((res) => setRecentSuggestions(res.data.data))
       .catch((error) => console.log(error));
   }, []);
@@ -39,7 +36,7 @@ const Suggestions = () => {
 
     try {
       await axios.post(
-        "https://hostelmanagement-23j3.onrender.com/dashboard/suggestions",
+        "https://svhostel.onrender.com/dashboard/suggestions",
         suggestion,
         {
           headers: {
@@ -50,7 +47,7 @@ const Suggestions = () => {
 
       // Fetch recent suggestions again after submitting a new suggestion
       const response = await axios.get(
-        "https://hostelmanagement-23j3.onrender.com/dashboard/suggestions/recent",
+        "https://svhostel.onrender.com/dashboard/suggestions/recent",
         {
           headers: {
             "x-token": localStorage.getItem("token"),

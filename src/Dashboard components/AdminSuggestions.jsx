@@ -8,14 +8,11 @@ const AdminSuggestions = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://hostelmanagement-23j3.onrender.com/admindashboard/suggestions",
-        {
-          headers: {
-            "x-token": localStorage.getItem("token"),
-          },
-        }
-      )
+      .get("https://svhostel.onrender.com/admindashboard/suggestions", {
+        headers: {
+          "x-token": localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         setUsersWithSuggestions(res.data.data);
         setIsLoading(false); // Updated state variable name to match the declaration
