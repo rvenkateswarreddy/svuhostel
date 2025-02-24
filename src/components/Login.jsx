@@ -44,7 +44,7 @@ const Login = () => {
       const userType = response.data.usertype; // Assuming the server returns the user's usertype
 
       if (userType === "admin") {
-        alert("Admin login successful");
+        alert("Admin login successfull");
 
         navigate("/admindashboard");
         toast.success("Admin successfully logged in!");
